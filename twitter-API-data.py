@@ -25,7 +25,7 @@ import geopandas as gpd
 
 # Streaming
 from tweepy.streaming import StreamListener
-from slistener import SListener
+#from slistener import slistener 
 
 # Other essential packages 
 import time
@@ -42,6 +42,14 @@ INPUTS:
 OUTPUTS:
     none, simply save the tweet info to a spreadsheet
 """
+class SListener(StreamListener):
+    def __init__(self, api = None, fprefix = 'streamer'):
+        self.api = api or API()
+        self.counter = 0
+        self.fprefix = fprefix
+        self.output  = open('%s_%s.json' % (self.fprefix, time.strftime('%Y%m%d-%H%M%S')), 'w')
+
+
 # Slistener
 class SListener(StreamListener):
     def __init__(self, api = None):
@@ -64,58 +72,63 @@ access_token_secret = "gEjlnSo8Tvp1QvuBiHbLW1AClibzrAu4zXR9mQkxfHz3S"
 # Phase 1:  
 # Consumer key authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-
 # Access key authentication
 auth.set_access_token(access_token, access_token_secret)
-
 # Set up the API with the authentication handler
 api  = tweepy.API(auth)
 
+# STREAM OPTION 1:
+## set up words to track
+track = ['Colston', 'Leopold']
+
+listen = SListener(api, 'BLM')
+stream = tweepy.Stream(auth, listen)
+
+print("Streaming started...")
+
+stream.filter(track = track)
+
+# STREAM OPTION 2:
 # Set up words to track
 keywords_to_track = ['#BLM']
-
 # Instantiate the SListener object 
 listen = SListener(api)
-
 # Instantiate the Stream object (remove tweepy if code does not run)
 stream = tweepy.Stream(auth, listen)
 print("Streaming Activated...")
-
 # Begin the collecting data
 stream.filter(track = keywords_to_track)
 
+
 # Phase 2:
+authObj = json.loads( open('keys.json', 'r').read())
 # Access the JSON file:
 import json
-
-tweet_json = open('tweet-example.json', 'r').read()
-
+# Access the JSON and open them
+tweet_json = open('streamer_20200612-094322.json', 'r').read()
+# Convert from JSON to Python object
 tweet = json.loads(tweet_json)
-
 tweet['text']
+tweet['id']
 
-# Acess the user data:
+
+# Access the user data:
 # Print user handle
 print(tweet['user']['screen_name'])
-
 # Print user follower count
 print(tweet['user']['followers_count'])
-
 # Print user location
 print(tweet['user']['location'])
-
 # Print user description
 print(tweet['user']['description'])
 
 # Acess the retweet data:
 # Print the text of the tweet
 print(rt['text'])
-
 # Print the text of tweet which has been retweeted
 print(rt['retweeted_status']['text'])
-
 # Print the user handle of the tweet
 print(rt['user']['screen_name'])
-
 # Print the user handle of the tweet which has been retweeted
 print(rt['retweeted_status']['user']['screen_name'])
+

@@ -59,15 +59,15 @@ class SListener(StreamListener):
      
 #authObj = json.loads( open('keys.json', 'r').read() )
 # Pass API permissions
-consumer_key = "rehHagu6gJho85oFtGVQzZpUa"
-consumer_secret = "0ShQ8hJzPwSEOYiu0u1QLLD2jHYzJhzwJnyo2wpKyHrwjDPmBG"
-access_token = "305201900-4XI5uGsLucYjksazjaJO0h3hdvMKcgKe8mM1A968"
-access_token_secret = "gEjlnSo8Tvp1QvuBiHbLW1AClibzrAu4zXR9mQkxfHz3S"
+consumer_key = ""
+consumer_secret = ""
+access_token = ""
+access_token_secret = ""
 # Pass API permissions
-#consumer_key = raw_input('rehHagu6gJho85oFtGVQzZpUa')
-#consumer_secret = raw_input('0ShQ8hJzPwSEOYiu0u1QLLD2jHYzJhzwJnyo2wpKyHrwjDPmBG')
-#access_token = raw_input('305201900-4XI5uGsLucYjksazjaJO0h3hdvMKcgKe8mM1A968')
-#access_token_secret = raw_input('gEjlnSo8Tvp1QvuBiHbLW1AClibzrAu4zXR9mQkxfHz3S')
+#consumer_key = raw_input('')
+#consumer_secret = raw_input('')
+#access_token = raw_input('')
+#access_token_secret = raw_input('')
 
 # Phase 1:  
 # Consumer key authentication

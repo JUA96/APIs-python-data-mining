@@ -22,10 +22,10 @@ def percentage(part, whole):
     return 100 * float(part)/float(whole)
 
 # Pass tweet api credentials
-consumerKey = "rehHagu6gJho85oFtGVQzZpUa"
-consumerSecret = "0ShQ8hJzPwSEOYiu0u1QLLD2jHYzJhzwJnyo2wpKyHrwjDPmBG"
-accessToken = "305201900-4XI5uGsLucYjksazjaJO0h3hdvMKcgKe8mM1A968"
-accessTokenSecret = "gEjlnSo8Tvp1QvuBiHbLW1AClibzrAu4zXR9mQkxfHz3S"
+consumerKey = ""
+consumerSecret = ""
+accessToken = ""
+accessTokenSecret = ""
 
 # Pass consumer key and consumer secret as the parameters
 auth = OAuthHandler(consumer_key = consumerKey, consumer_secret = consumerSecret)
@@ -58,4 +58,29 @@ for tweet in tweets:
         positive += 1
 
 positive = percentage(positive, noOfSearchTerms)
-negative = 
+negative = percentage(negative, noOfSearchTerms)
+neutral = percentage(neutral, noOfSearchTerms)
+
+positive = format(positive, '.2f')
+neutral = format(neutral, '.2f')
+negative = format(negative, '.2f')
+
+print("How people are reacting on " + searchTerm + "by analyzing " + str(noOfSearchTerms) + " Tweets.")
+
+if(polarity == 0):
+    print("Neutral")
+elif(polarity < 0):
+    print("Negative")
+elif(polarity > 0):
+    print("Positive")
+
+# Create the plot to show the variation in sentiment towards a topic.
+labels = ['Positive ['+str(positive)+'%]', 'Neutral [' + str(neutral) + '%]', 'Negative [' + str(negative) + '%]']
+sizes = [positive, neutral, negative]
+colors = ['yellowgreen', 'gold', 'red']
+patches, texts = plt.pie(sizes, colors=colors, startangle=90)
+plt.legend(patches, labels, loc="best")
+plt.title('How people are reacting on '+searchTerm+' by analyzing '+str(noOfSearchTerms)+' Tweets.')
+plt.axis('equal')
+plt.tight_layout()
+plt.show()

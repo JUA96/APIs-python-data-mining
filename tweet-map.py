@@ -28,10 +28,10 @@ import re
 
 
 # Pass API permissions
-consumer_key = ('rehHagu6gJho85oFtGVQzZpUa')
-consumer_secret = ('0ShQ8hJzPwSEOYiu0u1QLLD2jHYzJhzwJnyo2wpKyHrwjDPmBG')
-access_token = ('305201900-4XI5uGsLucYjksazjaJO0h3hdvMKcgKe8mM1A968')
-access_token_secret = ('gEjlnSo8Tvp1QvuBiHbLW1AClibzrAu4zXR9mQkxfHz3S')
+consumer_key = ('')
+consumer_secret = ('')
+access_token = ('')
+access_token_secret = ('')
 
 # Create API frame
 api = TwitterAPI(consumer_key, consumer_secret, access_token, access_token_secret)
